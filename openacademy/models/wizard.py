@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class Wizard(models.TransientModel):
     _name = 'openacademy.wizard'
@@ -17,5 +20,8 @@ class Wizard(models.TransientModel):
     @api.multi
     def subscribe(self):
         for session in self.session_ids:
+            _logger.debug()
+            _logger.debug(session.attendee_ids)
+            _logger.debug(self.attendee_ids)
             session.attendee_ids |= self.attendee_ids
         return {}
